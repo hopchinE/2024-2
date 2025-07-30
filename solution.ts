@@ -1,18 +1,20 @@
 const example = [[7, 6, 4, 2, 1],
                 [1, 2, 7, 8, 9],
+                [1, 3],
                 [9, 7, 6, 2, 1],
                 [1, 3, 2, 4, 5],
                 [8, 6, 4, 4, 1],
-                [1, 3, 6, 7, 9]
+                [1, 3, 6, 7, 9],
+                [0]
                 ];
 
 function analyze(reports: number[][]){
     const checks: string[] = [];
     reports.forEach((x, index) =>{
+        let message: string = `Report ${index} is safe`;
         if(x.length > 1){
             let i: number = 1;
             const ascending: boolean = x[0] < x[1];
-            let message: string = `Report ${index} is safe`;
             while(i < x.length){
                 const last: number = x[i - 1];
                 const current: number = x[i];
@@ -29,8 +31,11 @@ function analyze(reports: number[][]){
                 }
                 i++;
             }
-            checks.push(message);
         }
+        else{
+            message = `Report ${index} is invalid due to lack of data`;
+        }
+        checks.push(message);
     });
     checks.forEach((x) => {
         console.log(x);
